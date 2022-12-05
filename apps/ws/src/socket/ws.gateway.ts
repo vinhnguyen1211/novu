@@ -33,6 +33,8 @@ export class WSGateway implements OnGatewayConnection {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async sendMessage(userId: string, event: string, data: any) {
+    console.log('WSGateway -> sendMessage -> userId', userId);
+    console.log('WSGateway -> sendMessage -> data', data);
     this.server.to(userId).emit(event, data);
   }
 

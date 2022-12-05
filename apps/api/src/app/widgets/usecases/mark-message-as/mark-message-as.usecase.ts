@@ -57,6 +57,7 @@ export class MarkMessageAs {
   private updateSocketCount(subscriber: SubscriberEntity, count: number, mark: string) {
     const eventMessage = `un${mark}_count_changed`;
     const countKey = `un${mark}Count`;
+    console.log('MarkMessageAs -> updateSocketCount -> count', count);
 
     this.queueService.wsSocketQueue.add({
       event: eventMessage,

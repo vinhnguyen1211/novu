@@ -13,6 +13,7 @@ export class SocketModule implements OnModuleInit {
 
   async onModuleInit() {
     this.queueService.wsSocketQueue.process(5, async (job) => {
+      console.log('SocketModule -> this.queueService.wsSocketQueue.process -> job', job);
       this.wsGateway.sendMessage(job.data.userId, job.data.event, job.data.payload);
     });
   }
