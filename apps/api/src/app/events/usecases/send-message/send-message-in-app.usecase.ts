@@ -207,7 +207,13 @@ export class SendMessageInApp extends SendMessageType {
         },
       })
     );
-
+    console.log(`Before event trigger: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount,
+      },
+    })}`)
     await this.queueService.wsSocketQueue.add({
       event: 'unseen_count_changed',
       userId: command.subscriberId,
@@ -215,7 +221,20 @@ export class SendMessageInApp extends SendMessageType {
         unseenCount,
       },
     });
-
+    console.log(`Event triggered: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount,
+      },
+    })}`)
+    console.log(`Before event trigger: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount,
+      },
+    })}`)
     await this.queueService.wsSocketQueue.add({
       event: 'unread_count_changed',
       userId: command.subscriberId,
@@ -223,6 +242,13 @@ export class SendMessageInApp extends SendMessageType {
         unreadCount,
       },
     });
+    console.log(`Event triggered: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount,
+      },
+    })}`)
 
     await this.createExecutionDetails.execute(
       CreateExecutionDetailsCommand.create({

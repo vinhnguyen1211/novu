@@ -57,6 +57,13 @@ export class MarkMessageAs {
     const eventMessage = `un${mark}_count_changed`;
     const countKey = `un${mark}Count`;
 
+    console.log(`Before event trigger: ${JSON.stringify({
+      event: eventMessage,
+      userId: subscriber._id,
+      payload: {
+        [countKey]: count,
+      },
+    })}`)
     this.queueService.wsSocketQueue.add({
       event: eventMessage,
       userId: subscriber._id,
@@ -64,5 +71,12 @@ export class MarkMessageAs {
         [countKey]: count,
       },
     });
+    console.log(`Event triggered: ${JSON.stringify({
+      event: eventMessage,
+      userId: subscriber._id,
+      payload: {
+        [countKey]: count,
+      },
+    })}`)
   }
 }

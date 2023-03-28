@@ -15,7 +15,13 @@ export class MarkAllMessageAsSeen {
 
   async execute(command: MarkAllMessageAsSeenCommand): Promise<number> {
     const response = await this.messageRepository.markAllUnseenAsSeen(command.subscriberId, command.environmentId);
-
+    console.log(`Before event triggering: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount: 0,
+      },
+    })}`)
     this.queueService.wsSocketQueue.add({
       event: 'unseen_count_changed',
       userId: command.subscriberId,
@@ -23,6 +29,13 @@ export class MarkAllMessageAsSeen {
         unseenCount: 0,
       },
     });
+    console.log(`Event triggered: ${JSON.stringify({
+      event: 'unseen_count_changed',
+      userId: command.subscriberId,
+      payload: {
+        unseenCount: 0,
+      },
+    })}`)
 
     this.analyticsService.track('Mark all message as seen - [Notification Center]', command.organizationId, {
       _organization: command.organizationId,

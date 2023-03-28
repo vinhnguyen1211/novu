@@ -27,16 +27,31 @@ export class WSGateway implements OnGatewayConnection {
     } catch (e) {
       return this.disconnect(connection);
     }
-
+    console.log(`Socket connect: ${JSON.stringify({
+      id:connection.id
+    })}`)
     return await connection.join(subscriber._id);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async sendMessage(userId: string, event: string, data: any) {
+    console.log(`Send socket message: ${JSON.stringify({
+      userId,
+      event,
+      data
+    })}`)
     this.server.to(userId).emit(event, data);
+    console.log(`Socket message sent: ${JSON.stringify({
+      userId,
+      event,
+      data
+    })}`)
   }
 
   private disconnect(socket: Socket) {
     socket.disconnect();
+    console.log(`Socket disconnect: ${JSON.stringify({
+     id:socket.id
+    })}`)
   }
 }
