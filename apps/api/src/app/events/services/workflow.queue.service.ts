@@ -12,6 +12,7 @@ export class WorkflowQueueService {
       db: Number(process.env.REDIS_DB_INDEX),
       port: Number(process.env.REDIS_PORT),
       host: process.env.REDIS_HOST,
+      username: process.env.REDIS_USER,
       password: process.env.REDIS_PASSWORD,
       connectTimeout: 50000,
       keepAlive: 30000,
