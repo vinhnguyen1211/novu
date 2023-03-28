@@ -22,13 +22,18 @@ export class MarkAllMessageAsSeen {
         unseenCount: 0,
       },
     })}`)
-    this.queueService.wsSocketQueue.add({
-      event: 'unseen_count_changed',
-      userId: command.subscriberId,
-      payload: {
-        unseenCount: 0,
-      },
-    });
+    try {
+      this.queueService.wsSocketQueue.add({
+        event: 'unseen_count_changed',
+        userId: command.subscriberId,
+        payload: {
+          unseenCount: 0,
+        },
+      });
+    }catch (err){
+      console.error(err);
+      throw err;
+    }
     console.log(`Event triggered: ${JSON.stringify({
       event: 'unseen_count_changed',
       userId: command.subscriberId,

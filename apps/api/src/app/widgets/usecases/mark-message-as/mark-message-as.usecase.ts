@@ -64,13 +64,19 @@ export class MarkMessageAs {
         [countKey]: count,
       },
     })}`)
-    this.queueService.wsSocketQueue.add({
-      event: eventMessage,
-      userId: subscriber._id,
-      payload: {
-        [countKey]: count,
-      },
-    });
+    try {
+      this.queueService.wsSocketQueue.add({
+        event: eventMessage,
+        userId: subscriber._id,
+        payload: {
+          [countKey]: count,
+        },
+      });
+    }catch (err){
+      console.error(err);
+      throw err;
+    }
+
     console.log(`Event triggered: ${JSON.stringify({
       event: eventMessage,
       userId: subscriber._id,

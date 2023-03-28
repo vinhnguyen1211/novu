@@ -16,7 +16,12 @@ export class SocketModule implements OnModuleInit {
       console.log(`Receive job: ${JSON.stringify(
         job.data
       )}`)
-      this.wsGateway.sendMessage(job.data.userId, job.data.event, job.data.payload);
+      try {
+        this.wsGateway.sendMessage(job.data.userId, job.data.event, job.data.payload);
+      }catch (err){
+        console.error(err);
+        throw err;
+      }
       console.log(`Job processed: ${JSON.stringify(job.data)}`)
     });
   }

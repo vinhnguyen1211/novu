@@ -214,13 +214,19 @@ export class SendMessageInApp extends SendMessageType {
         unseenCount,
       },
     })}`)
-    await this.queueService.wsSocketQueue.add({
-      event: 'unseen_count_changed',
-      userId: command.subscriberId,
-      payload: {
-        unseenCount,
-      },
-    });
+    try{
+      await this.queueService.wsSocketQueue.add({
+        event: 'unseen_count_changed',
+        userId: command.subscriberId,
+        payload: {
+          unseenCount,
+        },
+      });
+    }catch (err){
+      console.error(err);
+      throw err;
+    }
+
     console.log(`Event triggered: ${JSON.stringify({
       event: 'unseen_count_changed',
       userId: command.subscriberId,
@@ -235,13 +241,18 @@ export class SendMessageInApp extends SendMessageType {
         unseenCount,
       },
     })}`)
-    await this.queueService.wsSocketQueue.add({
-      event: 'unread_count_changed',
-      userId: command.subscriberId,
-      payload: {
-        unreadCount,
-      },
-    });
+    try{
+      await this.queueService.wsSocketQueue.add({
+        event: 'unread_count_changed',
+        userId: command.subscriberId,
+        payload: {
+          unreadCount,
+        },
+      });
+    }catch (err){
+      console.error(err);
+      throw err;
+    }
     console.log(`Event triggered: ${JSON.stringify({
       event: 'unseen_count_changed',
       userId: command.subscriberId,
