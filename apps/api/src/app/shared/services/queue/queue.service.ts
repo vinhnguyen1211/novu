@@ -15,6 +15,7 @@ export class QueueService {
       port: Number(process.env.REDIS_PORT),
       host: process.env.REDIS_HOST,
       password: process.env.REDIS_PASSWORD,
+      username: process.env.REDIS_USER,
       connectTimeout: 50000,
       keepAlive: 30000,
       family: 4,
