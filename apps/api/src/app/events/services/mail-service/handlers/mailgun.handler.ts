@@ -14,7 +14,14 @@ export class MailgunHandler extends BaseHandler {
       username: string;
       domain: string;
       from: string;
-    } = { apiKey: credentials.apiKey, username: credentials.user, domain: credentials.domain, from };
+      baseUrl: string;
+    } = {
+      apiKey: credentials.apiKey,
+      username: credentials.user,
+      domain: credentials.domain,
+      baseUrl: credentials.baseUrl,
+      from,
+    };
 
     this.provider = new MailgunEmailProvider(config);
   }

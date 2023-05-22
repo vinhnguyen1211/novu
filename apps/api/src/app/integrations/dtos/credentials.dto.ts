@@ -35,4 +35,6 @@ export class CredentialsDto {
   applicationId?: string;
   @ApiPropertyOptional()
   clientId?: string;
+  @ApiPropertyOptional()
+  baseUrl?: string;
 }

@@ -14,6 +14,7 @@ export interface ICredentialsDto {
   from?: string;
   senderName?: string;
   projectName?: string;
+  baseUrl?: string;
 }
 export interface IConstructIntegrationDto {
   credentials: ICredentialsDto;
